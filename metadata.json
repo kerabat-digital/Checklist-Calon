@@ -1,0 +1,8 @@
+{
+  "name": "Checklist Calon Suami - Kenali Tindakan, Bukan Kata-Kata",
+  "description": "Aplikasi penilaian objektif calon pasangan hidup berdasarkan bukti tindakan nyata harian, psikologi perilaku, dan pencegahan love-bombing untuk wanita matang dan single mom.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff2b85"/>
+      <stop offset="100%" stop-color="#d70f64"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#a3084a" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Background squircle -->
+  <rect width="512" height="512" rx="128" fill="url(#brandGrad)"/>
+  
+  <!-- Outer shield / emblem -->
+  <g filter="url(#shadow)">
+    <!-- Clipboard / Shield base -->
+    <rect x="116" y="116" width="280" height="320" rx="40" fill="#ffffff" fill-opacity="0.95"/>
+    <rect x="186" y="80" width="140" height="60" rx="16" fill="#d70f64"/>
+    <circle cx="256" cy="110" r="12" fill="#ffffff"/>
+    
+    <!-- Checklist items with checkmarks and magnifying loupe -->
+    <!-- Item 1: Checked -->
+    <rect x="156" y="180" width="36" height="36" rx="8" fill="#10b981"/>
+    <path d="M165 198 L172 205 L183 192" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="208" y="190" width="140" height="16" rx="8" fill="#e2e8f0"/>
+    
+    <!-- Item 2: Checked -->
+    <rect x="156" y="240" width="36" height="36" rx="8" fill="#10b981"/>
+    <path d="M165 258 L172 265 L183 252" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="208" y="250" width="110" height="16" rx="8" fill="#e2e8f0"/>
+    
+    <!-- Item 3: Inspected heart -->
+    <rect x="156" y="300" width="36" height="36" rx="8" fill="#ff2b85"/>
+    <path d="M174 314 C174 310 168 308 165 312 C162 308 156 310 156 314 C156 322 174 329 174 329 C174 329 192 322 192 314 C192 310 186 308 183 312 C180 308 174 310 174 314 Z" fill="#ffffff" transform="scale(0.85) translate(28, 48)"/>
+    <rect x="208" y="310" width="130" height="16" rx="8" fill="#e2e8f0"/>
+
+    <!-- Magnifying glass examining action evidence -->
+    <circle cx="340" cy="350" r="42" fill="#fff0f5" stroke="#d70f64" stroke-width="8"/>
+    <line x1="370" y1="380" x2="410" y2="420" stroke="#d70f64" stroke-width="12" stroke-linecap="round"/>
+    <path d="M328 350 L337 359 L354 342" fill="none" stroke="#10b981" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
