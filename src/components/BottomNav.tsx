@@ -1,6 +1,7 @@
 import React from 'react';
 import { ActiveTab } from '../types';
 import { 
+  Home as HomeIcon,
   CheckSquare, 
   Calendar, 
   PieChart, 
@@ -21,6 +22,12 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   redFlagsCount,
 }) => {
   const tabs = [
+    {
+      id: 'home' as ActiveTab,
+      label: 'Home',
+      sublabel: 'Beranda',
+      icon: HomeIcon,
+    },
     {
       id: 'checklist' as ActiveTab,
       label: 'Checklist',
@@ -48,15 +55,15 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     },
     {
       id: 'soalan' as ActiveTab,
-      label: 'Pertanyaan',
-      sublabel: '32 Soal',
+      label: 'Soal',
+      sublabel: '32 Tanya',
       icon: HelpCircle,
     },
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#fcc2d7] px-2 py-2 shadow-[0_-4px_20px_rgba(215,15,100,0.08)]">
-      <div className="max-w-md mx-auto grid grid-cols-5 gap-1.5 sm:gap-2">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#fcc2d7] px-1 sm:px-2 py-2 shadow-[0_-4px_20px_rgba(215,15,100,0.08)]">
+      <div className="max-w-lg mx-auto grid grid-cols-6 gap-1 sm:gap-1.5">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           const IconComponent = tab.icon;

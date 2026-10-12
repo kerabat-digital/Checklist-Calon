@@ -23,6 +23,14 @@
   }
 }
 
+.font-script {
+  font-family: 'Great Vibes', cursive;
+}
+
+.font-serif-title {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
 /* Tactile 3D Button Utility Helpers */
 .btn-3d-primary {
   background-color: #d70f64;

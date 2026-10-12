@@ -78,4 +78,4 @@ export interface TaarufQuestionItem {
   proTip: string; // 💡 Tips Observasi Bahasa Tubuh
 }
 
-export type ActiveTab = 'checklist' | '30hari' | 'analisis' | 'jurnal' | 'soalan';
+export type ActiveTab = 'home' | 'checklist' | '30hari' | 'analisis' | 'jurnal' | 'soalan';

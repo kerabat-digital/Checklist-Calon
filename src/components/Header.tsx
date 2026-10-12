@@ -23,6 +23,7 @@ interface HeaderProps {
   onOpenCandidateModal: () => void;
   onOpenGuideModal: () => void;
   onOpenExportImportModal: () => void;
+  onNavigateHome?: () => void;
   totalCriteriaRated: number;
   totalDaysCompleted: number;
   compatibilityScore: number;
@@ -35,6 +36,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenCandidateModal,
   onOpenGuideModal,
   onOpenExportImportModal,
+  onNavigateHome,
   totalCriteriaRated,
   totalDaysCompleted,
   compatibilityScore,
@@ -58,19 +60,23 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Top row: Brand & Action Tools */}
         <div className="flex items-center justify-between gap-2">
           {/* Brand Identity */}
-          <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#d70f64] to-[#ff2b85] flex items-center justify-center text-white shadow-md shadow-[#d70f64]/20 flex-shrink-0">
+          <button
+            onClick={onNavigateHome}
+            className="flex items-center gap-2.5 min-w-0 text-left hover:opacity-90 transition-opacity cursor-pointer group"
+            title="Kembali ke Beranda"
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#d70f64] to-[#ff2b85] flex items-center justify-center text-white shadow-md shadow-[#d70f64]/20 flex-shrink-0 group-hover:scale-105 transition-transform">
               <HeartHandshake className="w-5 h-5" />
             </div>
             <div className="min-w-0">
-              <h1 className="text-base sm:text-lg font-black text-slate-900 truncate leading-tight tracking-tight">
+              <h1 className="text-base sm:text-lg font-black text-slate-900 truncate leading-tight tracking-tight group-hover:text-[#d70f64] transition-colors">
                 Checklist Calon Suami
               </h1>
               <p className="text-[11px] text-slate-500 font-medium truncate hidden sm:block">
                 Kenali Tindakan Nyata, Bukan Sekadar Kata-Kata
               </p>
             </div>
-          </div>
+          </button>
 
           {/* Action buttons */}
           <div className="flex items-center gap-1.5 flex-shrink-0">

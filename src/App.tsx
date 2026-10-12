@@ -20,6 +20,7 @@ import { DAY_GUIDE_DATA } from './data/dayGuideData';
 // Components
 import { Header } from './components/Header';
 import { BottomNav } from './components/BottomNav';
+import { HomeView } from './components/HomeView';
 import { ChecklistView } from './components/ChecklistView';
 import { ThirtyDaysView } from './components/ThirtyDaysView';
 import { AnalysisView } from './components/AnalysisView';
@@ -33,7 +34,7 @@ export default function App() {
   const [candidates, setCandidates] = useState<Candidate[]>(() => loadCandidates());
   const [activeCandidateId, setActiveCandidateId] = useState<string>(() => loadActiveCandidateId());
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>(() => loadJournalEntries());
-  const [activeTab, setActiveTab] = useState<ActiveTab>('checklist');
+  const [activeTab, setActiveTab] = useState<ActiveTab>('home');
 
   // Modals state
   const [guideModalOpen, setGuideModalOpen] = useState(false);
@@ -260,6 +261,7 @@ export default function App() {
         onOpenCandidateModal={() => setCandidateModalOpen(true)}
         onOpenGuideModal={() => setGuideModalOpen(true)}
         onOpenExportImportModal={() => setExportImportModalOpen(true)}
+        onNavigateHome={() => setActiveTab('home')}
         totalCriteriaRated={metrics.totalCriteriaRated}
         totalDaysCompleted={metrics.totalDaysCompleted}
         compatibilityScore={metrics.compatibilityScore}
@@ -267,6 +269,19 @@ export default function App() {
 
       {/* Main View Area */}
       <main className="flex-1 max-w-4xl w-full mx-auto px-3 sm:px-4 pt-3.5 pb-24">
+        {activeTab === 'home' && (
+          <HomeView
+            candidate={activeCandidate}
+            onNavigateTab={(tab) => setActiveTab(tab)}
+            onOpenCandidateModal={() => setCandidateModalOpen(true)}
+            onOpenGuideModal={() => setGuideModalOpen(true)}
+            totalCriteriaRated={metrics.totalCriteriaRated}
+            totalDaysCompleted={metrics.totalDaysCompleted}
+            compatibilityScore={metrics.compatibilityScore}
+            redFlagsCount={metrics.redFlagsCount}
+          />
+        )}
+
         {activeTab === 'checklist' && (
           <ChecklistView
             candidate={activeCandidate}
