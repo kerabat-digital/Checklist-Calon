@@ -111,11 +111,21 @@ export const QuestionsView: React.FC<QuestionsViewProps> = ({
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#d70f64] to-[#ff2b85] text-white flex items-center justify-center flex-shrink-0 shadow-md">
             <HelpCircle className="w-5 h-5" />
           </div>
-          <div>
-            <h2 className="text-sm sm:text-base font-black text-slate-900 leading-snug">
-              32 Soalan Ta'aruf Matang & Bedah Jawaban
-            </h2>
-            <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <h2 className="text-sm sm:text-base font-black text-slate-900 leading-snug">
+                32 Pertanyaan Ta'aruf Matang & Bedah Jawaban
+              </h2>
+            </div>
+            {/* Candidate quick profile info */}
+            <div className="flex items-center gap-1.5 flex-wrap mt-1 text-[11px] font-bold">
+              <span className="text-[#d70f64] font-black">{candidate.name}</span>
+              {candidate.age && <span className="bg-white px-2 py-0.5 rounded-md border border-[#fcc2d7] text-slate-700">🎂 {candidate.age} Thn</span>}
+              {candidate.maritalStatus && <span className="bg-white px-2 py-0.5 rounded-md border border-[#fcc2d7] text-[#d70f64]">💍 {candidate.maritalStatus}</span>}
+              {candidate.occupation && <span className="bg-white px-2 py-0.5 rounded-md border border-[#fcc2d7] text-amber-800">💼 {candidate.occupation}</span>}
+              {candidate.address && <span className="bg-white px-2 py-0.5 rounded-md border border-[#fcc2d7] text-slate-600">📍 {candidate.address}</span>}
+            </div>
+            <p className="text-xs text-slate-600 mt-1 leading-relaxed">
               Panduan pertanyaan psikologis dan syariat untuk mengungkap karakter asli. Nilai jawaban calon apakah mencerminkan kedewasaan (Green Flag) atau tanda manipulasi (Red Flag).
             </p>
           </div>
@@ -295,7 +305,7 @@ export const QuestionsView: React.FC<QuestionsViewProps> = ({
                     ) : (
                       <>
                         <Copy className="w-3.5 h-3.5" />
-                        <span>Salin Soalan</span>
+                        <span>Salin Pertanyaan</span>
                       </>
                     )}
                   </button>

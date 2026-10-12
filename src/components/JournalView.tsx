@@ -112,10 +112,18 @@ export const JournalView: React.FC<JournalViewProps> = ({
           <div className="w-10 h-10 rounded-xl bg-[#d70f64] text-white flex items-center justify-center flex-shrink-0 shadow-md">
             <ShieldAlert className="w-5 h-5" />
           </div>
-          <div>
+          <div className="min-w-0 flex-1">
             <h2 className="text-sm sm:text-base font-black text-slate-900 leading-snug">
               Diari Lapangan & Perlindungan dari Manipulasi
             </h2>
+            {/* Candidate quick profile info */}
+            <div className="flex items-center gap-1.5 flex-wrap mt-1 text-[11px] font-bold">
+              <span className="text-[#d70f64] font-black">{candidate.name}</span>
+              {candidate.age && <span className="bg-white px-2 py-0.5 rounded-md border border-[#fcc2d7] text-slate-700">🎂 {candidate.age} Thn</span>}
+              {candidate.maritalStatus && <span className="bg-white px-2 py-0.5 rounded-md border border-[#fcc2d7] text-[#d70f64]">💍 {candidate.maritalStatus}</span>}
+              {candidate.occupation && <span className="bg-white px-2 py-0.5 rounded-md border border-[#fcc2d7] text-amber-800 max-w-[180px] truncate">💼 {candidate.occupation}</span>}
+              {candidate.address && <span className="bg-white px-2 py-0.5 rounded-md border border-[#fcc2d7] text-slate-600 max-w-[180px] truncate">📍 {candidate.address}</span>}
+            </div>
             <p className="text-xs text-slate-600 mt-1 leading-relaxed">
               Catat kejadian, ucapan, dan tindakan nyata calon saat memori masih segar. Rekaman fakta tertulis adalah perisai terkuat Anda dari manipulasi (gaslighting) atau rayuan yang memutarbalikkan kenyataan.
             </p>

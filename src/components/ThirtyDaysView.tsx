@@ -81,7 +81,7 @@ export const ThirtyDaysView: React.FC<ThirtyDaysViewProps> = ({
             <Compass className="w-5 h-5" />
           </div>
           <div className="min-w-0 flex-1">
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
               <h2 className="text-sm sm:text-base font-black text-slate-900 leading-snug">
                 Perjalanan 30 Hari Mengenal Calon Suami
               </h2>
@@ -89,7 +89,15 @@ export const ThirtyDaysView: React.FC<ThirtyDaysViewProps> = ({
                 {phaseStats.totalCompleted}/30 Hari
               </span>
             </div>
-            <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+            {/* Candidate quick profile info */}
+            <div className="flex items-center gap-1.5 flex-wrap mt-1 text-[11px] font-bold">
+              <span className="text-[#d70f64] font-black">{candidate.name}</span>
+              {candidate.age && <span className="bg-white px-2 py-0.5 rounded-md border border-[#fcc2d7] text-slate-700">🎂 {candidate.age} Thn</span>}
+              {candidate.maritalStatus && <span className="bg-white px-2 py-0.5 rounded-md border border-[#fcc2d7] text-[#d70f64]">💍 {candidate.maritalStatus}</span>}
+              {candidate.occupation && <span className="bg-white px-2 py-0.5 rounded-md border border-[#fcc2d7] text-amber-800 max-w-[180px] truncate">💼 {candidate.occupation}</span>}
+              {candidate.address && <span className="bg-white px-2 py-0.5 rounded-md border border-[#fcc2d7] text-slate-600 max-w-[180px] truncate">📍 {candidate.address}</span>}
+            </div>
+            <p className="text-xs text-slate-600 mt-1 leading-relaxed">
               Panduan terstruktur langkah demi langkah selama sebulan untuk menguji karakter, kestabilan finansial, dan kedewasaan emosi sebelum komitmen seumur hidup.
             </p>
 

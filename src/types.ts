@@ -55,6 +55,10 @@ export interface CandidateQuestionItem {
 export interface Candidate {
   id: string;
   name: string;
+  age?: string;
+  maritalStatus?: string;
+  address?: string;
+  occupation?: string;
   createdAt: string;
   notes?: string;
   checklist: Record<string, CandidateChecklistItem>;

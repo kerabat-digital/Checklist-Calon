@@ -6,10 +6,20 @@ const STORAGE_KEYS = {
   JOURNAL: 'calon_suami_journal_v1',
 };
 
-export function createDefaultCandidate(name: string = 'Calon A'): Candidate {
+export function createDefaultCandidate(
+  name: string = 'Calon A',
+  age: string = '',
+  maritalStatus: string = 'Lajang',
+  address: string = '',
+  occupation: string = ''
+): Candidate {
   return {
     id: 'cand-' + Date.now() + '-' + Math.random().toString(36).substring(2, 7),
     name,
+    age,
+    maritalStatus,
+    address,
+    occupation,
     createdAt: new Date().toISOString(),
     notes: '',
     checklist: {},
@@ -34,6 +44,10 @@ export function loadCandidates(): Candidate[] {
     }
     return parsed.map((c: Candidate) => ({
       ...c,
+      age: c.age || '',
+      maritalStatus: c.maritalStatus || 'Lajang',
+      address: c.address || '',
+      occupation: c.occupation || '',
       checklist: c.checklist || {},
       dayRatings: c.dayRatings || {},
       questionRatings: c.questionRatings || {},

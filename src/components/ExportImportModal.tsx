@@ -4,7 +4,6 @@ import {
   DownloadCloud, 
   UploadCloud, 
   X, 
-  ShieldCheck, 
   FileJson, 
   Check, 
   AlertCircle 
@@ -81,14 +80,6 @@ export const ExportImportModal: React.FC<ExportImportModalProps> = ({
           >
             <X className="w-5 h-5" />
           </button>
-        </div>
-
-        {/* Privacy Note */}
-        <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 flex items-start gap-2">
-          <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-          <p className="font-medium leading-relaxed">
-            Data pribadi penilaian Anda 100% tersimpan di perangkat ini. Tidak ada server eksternal yang membaca isi catatan Anda.
-          </p>
         </div>
 
         {/* Section 1: Export Data */}

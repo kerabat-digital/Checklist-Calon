@@ -48,8 +48,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     },
     {
       id: 'soalan' as ActiveTab,
-      label: 'Soalan',
-      sublabel: '32 Tanya',
+      label: 'Pertanyaan',
+      sublabel: '32 Soal',
       icon: HelpCircle,
     },
   ];

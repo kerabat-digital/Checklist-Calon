@@ -175,6 +175,10 @@ export const AnalysisView: React.FC<AnalysisViewProps> = ({ candidate, onNavigat
   const handleCopySummary = () => {
     const summaryText = `[RINGKASAN DIAGNOSIS CALON SUAMI]
 Nama Calon: ${candidate.name}
+Usia: ${candidate.age ? `${candidate.age} Tahun` : 'Tidak dicantumkan'}
+Status Pernikahan: ${candidate.maritalStatus || 'Lajang'}
+Pekerjaan / Profesi: ${candidate.occupation || 'Tidak dicantumkan'}
+Alamat / Domisili: ${candidate.address || 'Tidak dicantumkan'}
 Tanggal Penilaian: ${new Date().toLocaleDateString('id-ID')}
 Skor Keserasian Objektif: ${analysis.score}%
 Status Lampu Lalu Lintas: ${analysis.verdictTitle}
@@ -183,6 +187,7 @@ Total Indikator Positif (Green Flag): ${analysis.totalGreen}
 Total Tanda Bahaya (Red Flag): ${analysis.totalRed}
 Kriteria Checklist Dinilai: ${analysis.checklistTotalRated}/25
 Hari Modul Diselesaikan: ${analysis.dayCompleted}/30
+Pertanyaan Ta'aruf Dinilai: ${analysis.questionsRated}/32
 
 Daftar Red Flag Terdeteksi:
 ${analysis.redFlagsList.length === 0 ? '- Tidak ada Red Flag yang terdeteksi.' : analysis.redFlagsList.map((r, i) => `${i + 1}. ${r.title} (${r.prompt})`).join('\n')}
@@ -221,6 +226,13 @@ ${analysis.verdictDesc}`;
             <h2 className="text-base sm:text-lg font-black text-slate-900 leading-tight pt-1">
               {analysis.verdictTitle}
             </h2>
+            <div className="flex items-center gap-1.5 flex-wrap pt-0.5 text-xs font-bold text-slate-800">
+              <span className="font-black text-slate-900">{candidate.name}</span>
+              {candidate.age && <span className="bg-white/80 px-2 py-0.5 rounded-md border border-black/10 text-[11px] font-bold">🎂 {candidate.age} Thn</span>}
+              {candidate.maritalStatus && <span className="bg-white/80 px-2 py-0.5 rounded-md border border-black/10 text-[11px] font-bold">💍 {candidate.maritalStatus}</span>}
+              {candidate.occupation && <span className="bg-white/80 px-2 py-0.5 rounded-md border border-black/10 text-[11px] font-bold text-amber-900">💼 {candidate.occupation}</span>}
+              {candidate.address && <span className="bg-white/80 px-2 py-0.5 rounded-md border border-black/10 text-[11px] font-medium text-slate-700">📍 {candidate.address}</span>}
+            </div>
             <p className="text-xs text-slate-700 leading-relaxed font-medium pt-1">
               {analysis.verdictDesc}
             </p>
@@ -254,7 +266,7 @@ ${analysis.verdictDesc}`;
           </div>
 
           <div className="bg-white/80 rounded-xl p-2.5 text-center shadow-2xs">
-            <span className="text-[11px] font-bold text-slate-500 block">Soalan Dinilai</span>
+            <span className="text-[11px] font-bold text-slate-500 block">Pertanyaan Dinilai</span>
             <span className="text-base font-black text-slate-800">
               {analysis.questionsRated}/32
             </span>
@@ -325,7 +337,7 @@ ${analysis.verdictDesc}`;
                     {item.title}
                   </span>
                   <span className="text-[10px] uppercase font-bold text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded-md">
-                    {item.source === 'checklist' ? 'Checklist' : item.source === 'question' ? 'Soalan Ta’aruf' : 'Panduan 30 Hari'}
+                    {item.source === 'checklist' ? 'Checklist' : item.source === 'question' ? 'Pertanyaan Ta’aruf' : 'Panduan 30 Hari'}
                   </span>
                 </div>
                 <p className="text-rose-800 font-medium pl-6">
@@ -346,7 +358,7 @@ ${analysis.verdictDesc}`;
       <div className="bg-white rounded-2xl border border-[#fcc2d7] p-4 shadow-xs space-y-3">
         <h3 className="text-sm font-black text-slate-900 flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-[#d70f64]" />
-          <span>Pecahan 4 Dimensi Kesiapan Pasangan</span>
+          <span>Rincian 4 Dimensi Kesiapan Pasangan</span>
         </h3>
 
         <div className="space-y-3">

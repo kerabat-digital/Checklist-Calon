@@ -138,15 +138,21 @@ export default function App() {
     setActiveCandidateId(id);
   };
 
-  const handleAddCandidate = (name: string) => {
-    const newCand = createDefaultCandidate(name);
+  const handleAddCandidate = (data: { name: string; age?: string; maritalStatus?: string; address?: string; occupation?: string }) => {
+    const newCand = createDefaultCandidate(
+      data.name,
+      data.age || '',
+      data.maritalStatus || 'Lajang',
+      data.address || '',
+      data.occupation || ''
+    );
     setCandidates((prev) => [...prev, newCand]);
     setActiveCandidateId(newCand.id);
   };
 
-  const handleRenameCandidate = (id: string, newName: string) => {
+  const handleUpdateCandidate = (id: string, data: { name?: string; age?: string; maritalStatus?: string; address?: string; occupation?: string }) => {
     setCandidates((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, name: newName } : c))
+      prev.map((c) => (c.id === id ? { ...c, ...data } : c))
     );
   };
 
@@ -320,7 +326,7 @@ export default function App() {
         activeCandidateId={activeCandidate.id}
         onSelectCandidate={handleSelectCandidate}
         onAddCandidate={handleAddCandidate}
-        onRenameCandidate={handleRenameCandidate}
+        onUpdateCandidate={handleUpdateCandidate}
         onDeleteCandidate={handleDeleteCandidate}
       />
 

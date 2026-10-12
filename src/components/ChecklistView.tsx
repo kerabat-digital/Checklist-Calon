@@ -98,10 +98,38 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
           <div className="w-11 h-11 rounded-2xl bg-white/20 backdrop-blur-xs text-white flex items-center justify-center flex-shrink-0 shadow-inner border border-white/30">
             <Eye className="w-6 h-6" />
           </div>
-          <div>
-            <h2 className="text-base sm:text-lg font-black text-white leading-tight">
-              25 Kriteria Penilaian Tindakan Nyata
-            </h2>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <h2 className="text-base sm:text-lg font-black text-white leading-tight">
+                25 Kriteria Penilaian Tindakan Nyata
+              </h2>
+            </div>
+            {/* Candidate quick profile info */}
+            <div className="flex items-center gap-1.5 flex-wrap mt-1 text-[11px] font-bold">
+              <span className="bg-white/90 text-[#d70f64] px-2 py-0.5 rounded-md font-black shadow-2xs">
+                👤 {candidate.name}
+              </span>
+              {candidate.age && (
+                <span className="bg-white/20 text-white px-2 py-0.5 rounded-md border border-white/30">
+                  🎂 {candidate.age} Tahun
+                </span>
+              )}
+              {candidate.maritalStatus && (
+                <span className="bg-white/20 text-white px-2 py-0.5 rounded-md border border-white/30">
+                  💍 {candidate.maritalStatus}
+                </span>
+              )}
+              {candidate.occupation && (
+                <span className="bg-white/20 text-white px-2 py-0.5 rounded-md border border-white/30 max-w-[200px] truncate">
+                  💼 {candidate.occupation}
+                </span>
+              )}
+              {candidate.address && (
+                <span className="bg-white/20 text-white px-2 py-0.5 rounded-md border border-white/30 max-w-[200px] truncate">
+                  📍 {candidate.address}
+                </span>
+              )}
+            </div>
             <p className="text-xs text-white/90 mt-1 leading-relaxed font-medium">
               Nilai calon berdasarkan bukti perbuatan harian yang Anda saksikan langsung di lapangan. Jangan terbuai oleh janji manis atau ayat rayuan di WhatsApp.
             </p>
