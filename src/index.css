@@ -31,6 +31,10 @@
   font-family: 'Playfair Display', Georgia, serif;
 }
 
+.font-serif-hero {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+}
+
 /* Tactile 3D Button Utility Helpers */
 .btn-3d-primary {
   background-color: #d70f64;

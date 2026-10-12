@@ -1,5 +1,6 @@
 import React from 'react';
 import { Candidate, ActiveTab } from '../types';
+import { heroSunsetBase64 } from '../assets/hero_sunset.base64';
 import { 
   CheckSquare, 
   Calendar, 
@@ -8,12 +9,11 @@ import {
   PieChart, 
   Users, 
   ArrowRight, 
-  Sparkles,
   ChevronRight,
   ShieldCheck,
   AlertTriangle,
   Info,
-  CheckCircle2,
+  Sparkles,
   Heart
 } from 'lucide-react';
 
@@ -38,181 +38,173 @@ export const HomeView: React.FC<HomeViewProps> = ({
   compatibilityScore,
   redFlagsCount,
 }) => {
-  // Navigation modules with explicit steps
-  const navFeatures = [
+  // 5 Dedicated Menus requested by user
+  const menuCards = [
     {
+      id: 'checklist',
       tab: 'checklist' as ActiveTab,
-      badge: 'LANGKAH 1',
-      badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-      title: '25 Kriteria Penilaian',
-      subtitle: 'Checklist Objektif Tindakan Nyata',
-      desc: 'Evaluasi akhlak, tanggung jawab finansial, keluarga & cara menyelesaikan konflik secara rasional tanpa ilusi kata manis.',
+      title: 'Checklist',
+      subtitle: '25 Kriteria',
+      desc: 'Evaluasi akhlak, komitmen, kesiapan finansial & kedewasaan emosional berbasis fakta.',
       icon: CheckSquare,
-      iconBg: 'bg-emerald-500',
-      actionText: 'Buka Checklist',
       status: `${totalCriteriaRated}/25 Dinilai`,
-      highlight: totalCriteriaRated === 0 ? 'Mulai Sekarang' : `${totalCriteriaRated} Selesai`,
+      badge: 'Langkah 1',
     },
     {
+      id: '30hari',
       tab: '30hari' as ActiveTab,
-      badge: 'LANGKAH 2',
-      badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-      title: '30 Hari Perjalanan',
-      subtitle: 'Panduan Lapangan & Uji Tindakan Nyata',
-      desc: 'Misi harian terarah selama 30 hari untuk mengamati karakter asli calon dalam situasi nyata dan tekanan emosional.',
+      title: '30 Hari',
+      subtitle: 'Kenali Calon',
+      desc: 'Misi observasi harian untuk melihat respon karakter asli saat tertekan atau diuji waktu.',
       icon: Calendar,
-      iconBg: 'bg-purple-500',
-      actionText: 'Lihat Misi Harian',
       status: `Hari ${totalDaysCompleted}/30`,
-      highlight: `${totalDaysCompleted} Hari Selesai`,
+      badge: 'Langkah 2',
     },
     {
-      tab: 'soalan' as ActiveTab,
-      badge: 'LANGKAH 3',
-      badgeColor: 'bg-sky-100 text-sky-800 border-sky-200',
-      title: 'Pertanyaan Ta\'aruf',
-      subtitle: '32 Soal Kritis & Psikologi Komunikasi',
-      desc: 'Daftar pertanyaan mendalam beserta indikator jawaban matang (green flag) dan jawaban manipulatif/love-bombing.',
-      icon: HelpCircle,
-      iconBg: 'bg-sky-500',
-      actionText: 'Buka 32 Soal',
-      status: '32 Soal Syar\'i & Kritis',
-      highlight: 'Lengkap Panduan',
-    },
-    {
-      tab: 'jurnal' as ActiveTab,
-      badge: 'CATATAN',
-      badgeColor: 'bg-amber-100 text-amber-800 border-amber-200',
-      title: 'Jurnal Observasi',
-      subtitle: 'Diari Catatan Perilaku & Momen Kunci',
-      desc: 'Dokumentasikan fakta lapangan yang Anda lihat langsung—bukan janji manis atau asumsi angan-angan.',
-      icon: BookOpen,
-      iconBg: 'bg-amber-500',
-      actionText: 'Tulis Catatan',
-      status: 'Privasi 100% Offline',
-      highlight: 'Bebas Bias',
-    },
-    {
+      id: 'analisis',
       tab: 'analisis' as ActiveTab,
-      badge: 'KESIMPULAN',
-      badgeColor: 'bg-[#ffdeeb] text-[#d70f64] border-[#fcc2d7]',
-      title: 'Analisis & Diagnosis',
-      subtitle: 'Skor Kecocokan & Rekomendasi Siap Kirim ke Wali',
-      desc: 'Rangkuman lengkap lampu hijau vs sinyal bahaya (red flags), skor objektif, serta format teks siap salin untuk istikharah dan musyawarah.',
+      title: 'Analisis',
+      subtitle: 'Lihat Hasil',
+      desc: 'Rangkuman skor objektif, sinyal bahaya (red flag) & format musyawarah wali.',
       icon: PieChart,
-      iconBg: 'bg-[#d70f64]',
-      actionText: 'Lihat Hasil Diagnosis',
       status: `${compatibilityScore}% Kecocokan`,
-      highlight: redFlagsCount > 0 ? `⚠️ ${redFlagsCount} Red Flag!` : 'Periksa Sekarang',
+      badge: redFlagsCount > 0 ? `${redFlagsCount} Red Flag` : 'Hasil Diagnosis',
+    },
+    {
+      id: 'jurnal',
+      tab: 'jurnal' as ActiveTab,
+      title: 'Jurnal',
+      subtitle: 'Catatan Fakta',
+      desc: 'Dokumentasikan bukti tindakan dan pengamatan langsung tanpa ilusi kata-kata.',
+      icon: BookOpen,
+      status: 'Catatan Pribadi',
+      badge: 'Bebas Bias',
+    },
+    {
+      id: 'soalan',
+      tab: 'soalan' as ActiveTab,
+      title: 'Pertanyaan',
+      subtitle: '32 Soalan Ta\'aruf',
+      desc: 'Panduan dialog mendalam dengan tolok ukur jawaban jujur vs jawaban love-bombing.',
+      icon: HelpCircle,
+      status: '32 Soal Kritis',
+      badge: 'Panduan Dialog',
     },
   ];
 
   return (
-    <div className="space-y-6 pb-6 animate-fadeIn">
+    <div className="space-y-5 pb-8 animate-fadeIn max-w-xl mx-auto sm:max-w-2xl md:max-w-3xl">
       {/* ============================================================ */}
-      {/* HERO POSTER COVER (EXACT REPLICA OF clist.PNG DESIGN)       */}
+      {/* EDITORIAL HERO SECTION                                       */}
+      {/* Palet: Ivory #FFF9F5, Blush #F8E6E9, Dusty Rose #C77C8D,      */}
+      {/*        Deep Plum #422A38, Champagne #EAD6BF                 */}
       {/* ============================================================ */}
-      <section className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-[#ffb6c1] bg-black">
-        {/* Background Image Container with Arch & Woman looking out at Mosque */}
-        <div className="relative w-full h-[460px] sm:h-[540px] md:h-[620px] overflow-hidden flex flex-col justify-between">
+      <section className="relative rounded-[32px] overflow-hidden shadow-xl border border-[#EAD6BF]/80 bg-[#FFF9F5]">
+        {/* Background Image Container */}
+        <div className="relative w-full h-[500px] sm:h-[550px] md:h-[590px] overflow-hidden flex flex-col justify-between">
           <img
-            src="/clist_cover.jpg"
-            alt="Checklist Calon Suami - Pilihan yang tepat bermula dengan penilaian yang bijak"
-            className="absolute inset-0 w-full h-full object-cover object-[center_25%] transform hover:scale-102 transition-transform duration-1000 ease-out"
+            src={heroSunsetBase64}
+            alt="Muslimah menghadap pemandangan kota saat golden hour - Checklist Bakal Suami"
+            className="absolute inset-0 w-full h-full object-cover object-[center_32%] transform scale-102 transition-transform duration-1000 ease-out"
+            loading="eager"
+            fetchPriority="high"
           />
 
-          {/* Gentle cinematic lighting vignette: soft dark tone on top and bottom so text pops vividly */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/85" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+          {/* Editorial Soft Overlay Gradients */}
+          {/* Top subtle vignette for small headline readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#422A38]/70 via-[#422A38]/15 to-transparent h-40 pointer-events-none" />
+          
+          {/* Bottom rich smooth gradient into soft ivory/champagne backdrop */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FFF9F5] via-[#FFF9F5]/90 via-55% to-transparent pointer-events-none" />
 
           {/* -------------------------------------------------------- */}
-          {/* TOP SECTION: Script quote + Heart icon (Exactly like clist.PNG) */}
+          {/* TOP HEADER: Headline Kecil & Tombol Panduan              */}
           {/* -------------------------------------------------------- */}
-          <div className="relative z-10 p-5 sm:p-7 md:p-8 flex items-start justify-between">
-            <div className="max-w-[75%] sm:max-w-md">
-              <p className="font-script text-white text-2xl sm:text-3xl md:text-4xl leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] tracking-wide">
-                Pilihan yang tepat bermula dengan penilaian yang bijak
-              </p>
-              
-              {/* Hand-drawn style Heart outline matching clist.PNG */}
-              <div className="mt-1.5 flex items-center">
-                <svg 
-                  className="w-6 h-6 sm:w-7 sm:h-7 text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] stroke-[2.2]" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                </svg>
+          <div className="relative z-10 px-5 pt-5 sm:px-7 sm:pt-6 flex items-start justify-between gap-3">
+            <div className="max-w-[78%] sm:max-w-md">
+              {/* Headline kecil seperti arahan nomor 3 */}
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white shadow-sm mb-1">
+                <Sparkles className="w-3 h-3 text-[#F8E6E9]" />
+                <span className="text-[11px] sm:text-xs font-medium tracking-wide">
+                  Prinsip Muslimah Cerdas
+                </span>
               </div>
+              <p className="text-white text-xs sm:text-sm md:text-base font-semibold leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] tracking-wide">
+                &ldquo;Pilih yang Siap, Bukan yang Sekadar Pandai Berjanji.&rdquo;
+              </p>
             </div>
 
-            {/* Panduan Quick Button */}
+            {/* Tombol Panduan Cepat */}
             <button
               onClick={onOpenGuideModal}
-              className="bg-white/25 hover:bg-white/40 backdrop-blur-md text-white text-xs font-bold px-3.5 py-1.5 rounded-full border border-white/50 shadow-md flex items-center gap-1.5 transition-all"
+              className="bg-white/70 hover:bg-white/90 backdrop-blur-md text-[#422A38] text-xs font-bold px-3 py-1.5 rounded-full border border-[#EAD6BF] shadow-sm flex items-center gap-1.5 transition-all cursor-pointer active:scale-95"
+              title="Buka panduan penilaian"
             >
-              <Info className="w-3.5 h-3.5 text-pink-200" />
-              <span>Panduan</span>
+              <Info className="w-3.5 h-3.5 text-[#C77C8D]" />
+              <span className="hidden xs:inline">Panduan</span>
             </button>
           </div>
 
           {/* -------------------------------------------------------- */}
-          {/* BOTTOM SECTION: Big Title, Subtitle, and Pink Pill Button */}
+          {/* BOTTOM HERO CONTENT: Judul Serif, Subtitle, & Tombol Pill */}
           {/* -------------------------------------------------------- */}
-          <div className="relative z-10 px-5 pb-6 sm:px-8 sm:pb-8 text-center flex flex-col items-center">
-            {/* Title with distinctive serif font matching clist.PNG */}
+          <div className="relative z-10 px-5 pb-7 sm:px-8 sm:pb-9 text-center flex flex-col items-center">
+            {/* Judul Utama Besar dengan Tipografi Serif Elegan */}
             <div className="mb-2">
-              <h1 className="font-serif-title font-bold tracking-normal leading-[1.05] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
-                <span className="block text-4xl sm:text-5xl md:text-6xl text-white font-extrabold tracking-tight">
+              <h1 className="font-serif-hero font-bold tracking-tight leading-[1.08]">
+                <span className="block text-4xl sm:text-5xl md:text-6xl text-[#422A38] font-bold tracking-tight drop-shadow-xs">
                   Checklist
                 </span>
-                <span className="block text-4xl sm:text-5xl md:text-6xl text-[#ff529a] font-serif-title italic font-black mt-0.5 drop-shadow-[0_4px_16px_rgba(255,82,154,0.7)]">
-                  Calon Suami
+                <span className="block text-4xl sm:text-5xl md:text-6xl text-[#C77C8D] font-serif-hero italic font-semibold mt-0.5">
+                  Bakal Suami
                 </span>
               </h1>
             </div>
 
-            {/* Subtitle: "Kenali Tindakan, Bukan Kata-Kata" */}
-            <p className="text-white text-xs sm:text-sm md:text-base font-semibold drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] tracking-wide mb-5 text-pink-100/95 max-w-md">
-              Kenali Tindakan, Bukan Kata-Kata
+            {/* Subtitle */}
+            <p className="text-[#422A38]/90 text-xs sm:text-sm md:text-base font-medium tracking-wide mb-6 max-w-sm sm:max-w-md">
+              Kenali Tindakan, Bukan Sekadar Kata-Kata
             </p>
 
-            {/* CTA Button: Solid pink pill with arrow matching clist.PNG "Mula Sekarang" */}
+            {/* Tombol Utama Berbentuk Pill: "Mulai Penilaian Saya →" */}
             <button
               onClick={() => onNavigateTab('checklist')}
-              className="group inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 rounded-full text-white font-black text-sm sm:text-base bg-[#ff2b85] hover:bg-[#d70f64] shadow-[0_8px_25px_rgba(255,43,133,0.6)] border-2 border-white/40 transform active:scale-95 hover:scale-105 transition-all duration-200 cursor-pointer"
+              className="group inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 rounded-full text-white font-bold text-sm sm:text-base bg-[#C77C8D] hover:bg-[#b86d7e] active:scale-95 shadow-[0_8px_22px_rgba(199,124,141,0.45)] border border-[#EAD6BF]/60 transition-all duration-200 cursor-pointer"
             >
-              <span>Mulai Sekarang</span>
+              <span>Mulai Penilaian Saya</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
             </button>
           </div>
         </div>
 
-        {/* Hero Bottom Bar: Active Candidate Information Bar */}
-        <div className="bg-[#fff0f5] px-4 sm:px-6 py-3 border-t-2 border-[#fcc2d7] flex flex-wrap items-center justify-between gap-3">
+        {/* ---------------------------------------------------------- */}
+        {/* HERO BOTTOM BAR: Profil Calon Aktif                         */}
+        {/* ---------------------------------------------------------- */}
+        <div className="bg-[#F8E6E9]/60 px-4 sm:px-6 py-3 border-t border-[#EAD6BF]/60 flex flex-wrap items-center justify-between gap-2.5">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">Calon Aktif:</span>
-            <span className="text-sm font-black text-[#d70f64] bg-white px-3 py-1 rounded-xl border border-[#fcc2d7] shadow-xs">
+            <span className="text-[11px] text-[#422A38]/70 font-bold uppercase tracking-wider">
+              Calon Dinilai:
+            </span>
+            <span className="text-xs sm:text-sm font-bold text-[#422A38] bg-white px-3 py-1 rounded-full border border-[#EAD6BF]/70 shadow-2xs">
               {candidate.name}
             </span>
             {candidate.age && (
-              <span className="text-xs font-bold text-slate-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200">
-                {candidate.age} tahun
+              <span className="text-xs font-medium text-[#422A38]/80 bg-white/80 px-2.5 py-0.5 rounded-full border border-[#EAD6BF]/50">
+                {candidate.age} th
               </span>
             )}
             {candidate.occupation && (
-              <span className="text-xs font-bold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200">
+              <span className="text-xs font-medium text-[#422A38]/80 bg-white/80 px-2.5 py-0.5 rounded-full border border-[#EAD6BF]/50">
                 💼 {candidate.occupation}
               </span>
             )}
             {candidate.maritalStatus && (
-              <span className="text-xs font-bold text-purple-800 bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200">
+              <span className="text-xs font-medium text-[#422A38]/80 bg-white/80 px-2.5 py-0.5 rounded-full border border-[#EAD6BF]/50">
                 💍 {candidate.maritalStatus}
               </span>
             )}
             {candidate.address && (
-              <span className="text-xs font-bold text-slate-600 bg-white px-2.5 py-1 rounded-lg border border-slate-200">
+              <span className="text-xs font-medium text-[#422A38]/80 bg-white/80 px-2.5 py-0.5 rounded-full border border-[#EAD6BF]/50">
                 📍 {candidate.address}
               </span>
             )}
@@ -220,162 +212,81 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
           <button
             onClick={onOpenCandidateModal}
-            className="text-xs font-bold text-[#d70f64] hover:text-[#a3084a] flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-[#fcc2d7] hover:bg-pink-50 transition-colors shadow-xs ml-auto"
+            className="text-xs font-bold text-[#C77C8D] hover:text-[#422A38] flex items-center gap-1 bg-white px-3 py-1.5 rounded-full border border-[#EAD6BF]/70 hover:bg-[#F8E6E9]/40 transition-colors shadow-2xs ml-auto cursor-pointer"
           >
             <Users className="w-3.5 h-3.5" />
-            <span>Ganti / Kelola Calon</span>
+            <span>Kelola Calon</span>
             <ChevronRight className="w-3 h-3" />
           </button>
         </div>
       </section>
 
       {/* ============================================================ */}
-      {/* QUICK SUMMARY PROGRESS METRICS                                */}
-      {/* ============================================================ */}
-      <section className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div 
-          onClick={() => onNavigateTab('checklist')}
-          className="bg-white rounded-2xl p-4 border border-[#fcc2d7] shadow-xs flex flex-col justify-between hover:border-[#d70f64] transition-all cursor-pointer group"
-        >
-          <div className="flex items-center justify-between text-slate-400 mb-1.5">
-            <span className="text-xs font-bold text-slate-600 group-hover:text-[#d70f64] transition-colors">25 Kriteria</span>
-            <CheckSquare className="w-4 h-4 text-emerald-500" />
-          </div>
-          <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-black text-slate-900">{totalCriteriaRated}</span>
-            <span className="text-xs text-slate-400 font-semibold">/ 25 dinilai</span>
-          </div>
-          <div className="w-full bg-slate-100 h-2 rounded-full mt-2.5 overflow-hidden">
-            <div 
-              className="bg-emerald-500 h-full rounded-full transition-all duration-300"
-              style={{ width: `${Math.round((totalCriteriaRated / 25) * 100)}%` }}
-            />
-          </div>
-        </div>
-
-        <div 
-          onClick={() => onNavigateTab('30hari')}
-          className="bg-white rounded-2xl p-4 border border-[#fcc2d7] shadow-xs flex flex-col justify-between hover:border-[#d70f64] transition-all cursor-pointer group"
-        >
-          <div className="flex items-center justify-between text-slate-400 mb-1.5">
-            <span className="text-xs font-bold text-slate-600 group-hover:text-[#d70f64] transition-colors">30 Hari Misi</span>
-            <Calendar className="w-4 h-4 text-purple-500" />
-          </div>
-          <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-black text-slate-900">{totalDaysCompleted}</span>
-            <span className="text-xs text-slate-400 font-semibold">/ 30 hari</span>
-          </div>
-          <div className="w-full bg-slate-100 h-2 rounded-full mt-2.5 overflow-hidden">
-            <div 
-              className="bg-purple-500 h-full rounded-full transition-all duration-300"
-              style={{ width: `${Math.round((totalDaysCompleted / 30) * 100)}%` }}
-            />
-          </div>
-        </div>
-
-        <div 
-          onClick={() => onNavigateTab('analisis')}
-          className="bg-white rounded-2xl p-4 border border-[#fcc2d7] shadow-xs flex flex-col justify-between hover:border-[#d70f64] transition-all cursor-pointer group"
-        >
-          <div className="flex items-center justify-between text-slate-400 mb-1.5">
-            <span className="text-xs font-bold text-slate-600 group-hover:text-[#d70f64] transition-colors">Kecocokan</span>
-            <PieChart className="w-4 h-4 text-[#d70f64]" />
-          </div>
-          <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-black text-[#d70f64]">{compatibilityScore}%</span>
-            <span className="text-xs text-slate-400 font-semibold">skor</span>
-          </div>
-          <div className="w-full bg-slate-100 h-2 rounded-full mt-2.5 overflow-hidden">
-            <div 
-              className="bg-gradient-to-r from-pink-500 to-[#d70f64] h-full rounded-full transition-all duration-300"
-              style={{ width: `${compatibilityScore}%` }}
-            />
-          </div>
-        </div>
-
-        <div 
-          onClick={() => onNavigateTab('analisis')}
-          className="bg-white rounded-2xl p-4 border border-[#fcc2d7] shadow-xs flex flex-col justify-between hover:border-[#d70f64] transition-all cursor-pointer group"
-        >
-          <div className="flex items-center justify-between text-slate-400 mb-1.5">
-            <span className="text-xs font-bold text-slate-600 group-hover:text-[#d70f64] transition-colors">Sinyal Bahaya</span>
-            <AlertTriangle className={`w-4 h-4 ${redFlagsCount > 0 ? 'text-rose-500 animate-pulse' : 'text-slate-300'}`} />
-          </div>
-          <div className="flex items-baseline gap-1">
-            <span className={`text-2xl font-black ${redFlagsCount > 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
-              {redFlagsCount}
-            </span>
-            <span className="text-xs text-slate-400 font-semibold">red flag</span>
-          </div>
-          <div className="w-full bg-slate-100 h-2 rounded-full mt-2.5 overflow-hidden">
-            <div 
-              className={`h-full rounded-full transition-all duration-300 ${redFlagsCount > 0 ? 'bg-rose-500' : 'bg-emerald-500'}`}
-              style={{ width: redFlagsCount > 0 ? '100%' : '0%' }}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================ */}
-      {/* MODUL PENILAIAN LENGKAP                                       */}
+      {/* 5 MENU CARD DALAM GRID DUA KOLOM                             */}
+      {/* Card putih/ivory, rounded, outline dusty rose, shadow tipis   */}
       {/* ============================================================ */}
       <section className="space-y-3">
         <div className="flex items-center justify-between px-1">
           <div>
-            <h2 className="text-lg font-black text-slate-900 tracking-tight">
-              Modul Penilaian & Investigasi Karakter
+            <h2 className="text-base sm:text-lg font-serif-hero font-bold text-[#422A38] tracking-tight">
+              Modul Penilaian Karakter
             </h2>
-            <p className="text-xs text-slate-500 font-medium">
-              Ikuti alur terstruktur untuk memastikan keputusan hidup Anda berbasis fakta nyata
+            <p className="text-xs text-[#422A38]/70">
+              Pilih modul evaluasi untuk memverifikasi kesiapan dan kepribadian calon
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-          {navFeatures.map((feat) => {
-            const Icon = feat.icon;
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+          {menuCards.map((item, idx) => {
+            const Icon = item.icon;
+            // 5th card spans 2 columns to complete the 2-column grid gracefully
+            const isLastSingle = idx === 4;
+
             return (
               <div
-                key={feat.tab}
-                onClick={() => onNavigateTab(feat.tab)}
-                className="group cursor-pointer bg-white rounded-2xl p-4 sm:p-5 border border-[#fcc2d7] hover:border-[#d70f64] hover:shadow-lg transition-all duration-200 flex flex-col justify-between"
+                key={item.id}
+                onClick={() => onNavigateTab(item.tab)}
+                className={`group cursor-pointer bg-[#FFF9F5] hover:bg-white rounded-2xl p-4 sm:p-5 border border-[#EAD6BF]/70 hover:border-[#C77C8D] shadow-[0_2px_10px_rgba(66,42,56,0.04)] hover:shadow-md transition-all duration-200 flex flex-col justify-between ${
+                  isLastSingle ? 'col-span-2 sm:col-span-2' : 'col-span-1'
+                }`}
               >
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-2.5">
-                    <span className={`text-[10px] font-black tracking-wider uppercase px-2 py-0.5 rounded-md border ${feat.badgeColor}`}>
-                      {feat.badge}
-                    </span>
-                    <span className="text-[11px] font-bold text-slate-500 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-200">
-                      {feat.highlight}
+                  {/* Top Bar inside Card: Outline Icon & Badge */}
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#F8E6E9] border border-[#EAD6BF]/60 text-[#C77C8D] flex items-center justify-center flex-shrink-0 group-hover:scale-105 group-hover:bg-[#C77C8D] group-hover:text-white transition-all">
+                      <Icon className="w-5 h-5 stroke-[1.8]" />
+                    </div>
+
+                    <span className="text-[10px] sm:text-xs font-bold text-[#422A38]/70 bg-[#F8E6E9]/60 px-2 py-0.5 rounded-full border border-[#EAD6BF]/50">
+                      {item.badge}
                     </span>
                   </div>
 
-                  <div className="flex items-start gap-3 mb-2">
-                    <div className={`w-11 h-11 rounded-2xl ${feat.iconBg} text-white flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform`}>
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-base font-black text-slate-900 leading-tight group-hover:text-[#d70f64] transition-colors">
-                        {feat.title}
-                      </h3>
-                      <p className="text-xs font-semibold text-slate-500">
-                        {feat.subtitle}
-                      </p>
-                    </div>
+                  {/* Title & Subtitle */}
+                  <div>
+                    <h3 className="text-sm sm:text-base font-bold text-[#422A38] group-hover:text-[#C77C8D] transition-colors leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs font-semibold text-[#C77C8D] mt-0.5">
+                      — {item.subtitle}
+                    </p>
                   </div>
 
-                  <p className="text-xs text-slate-600 leading-relaxed mt-2 mb-3">
-                    {feat.desc}
+                  {/* Description */}
+                  <p className="text-[11px] sm:text-xs text-[#422A38]/75 leading-relaxed mt-2 line-clamp-2">
+                    {item.desc}
                   </p>
                 </div>
 
-                <div className="pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-400">
-                    {feat.status}
+                {/* Bottom Footer inside Card: Status indicator & Arrow */}
+                <div className="pt-3 mt-3 border-t border-[#EAD6BF]/40 flex items-center justify-between text-[11px] sm:text-xs">
+                  <span className="font-semibold text-[#422A38]/60">
+                    {item.status}
                   </span>
-                  <div className="inline-flex items-center gap-1 font-bold text-[#d70f64] group-hover:translate-x-1.5 transition-transform">
-                    <span>{feat.actionText}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                  <div className="inline-flex items-center gap-1 font-bold text-[#C77C8D] group-hover:translate-x-1 transition-transform">
+                    <span>Buka</span>
+                    <ArrowRight className="w-3 h-3" />
                   </div>
                 </div>
               </div>
@@ -385,35 +296,96 @@ export const HomeView: React.FC<HomeViewProps> = ({
       </section>
 
       {/* ============================================================ */}
-      {/* 3 PRINSIP PENILAIAN OBJEKTIF                                  */}
+      {/* QUICK SUMMARY PROGRESS METRICS (Pelengkap Konsistensi Data)    */}
       {/* ============================================================ */}
-      <section className="bg-gradient-to-br from-rose-50 via-white to-pink-50 rounded-2xl p-4 sm:p-5 border border-[#fcc2d7] shadow-xs">
+      <section className="bg-white rounded-2xl p-4 sm:p-5 border border-[#EAD6BF]/70 shadow-[0_2px_10px_rgba(66,42,56,0.03)]">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <Heart className="w-4 h-4 text-[#C77C8D]" />
+            <h3 className="text-xs sm:text-sm font-bold text-[#422A38] uppercase tracking-wider">
+              Ringkasan Kemajuan Evaluasi
+            </h3>
+          </div>
+          <span className="text-xs font-semibold text-[#422A38]/60">
+            {candidate.name}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
+          <div 
+            onClick={() => onNavigateTab('checklist')}
+            className="p-2.5 rounded-xl bg-[#FFF9F5] border border-[#EAD6BF]/60 hover:border-[#C77C8D] cursor-pointer transition-colors"
+          >
+            <div className="text-lg sm:text-xl font-black text-[#422A38]">
+              {totalCriteriaRated}<span className="text-xs text-[#422A38]/50 font-normal">/25</span>
+            </div>
+            <div className="text-[11px] text-[#422A38]/70 font-medium">Kriteria Dinilai</div>
+          </div>
+
+          <div 
+            onClick={() => onNavigateTab('30hari')}
+            className="p-2.5 rounded-xl bg-[#FFF9F5] border border-[#EAD6BF]/60 hover:border-[#C77C8D] cursor-pointer transition-colors"
+          >
+            <div className="text-lg sm:text-xl font-black text-[#422A38]">
+              {totalDaysCompleted}<span className="text-xs text-[#422A38]/50 font-normal">/30</span>
+            </div>
+            <div className="text-[11px] text-[#422A38]/70 font-medium">Hari Misi</div>
+          </div>
+
+          <div 
+            onClick={() => onNavigateTab('analisis')}
+            className="p-2.5 rounded-xl bg-[#FFF9F5] border border-[#EAD6BF]/60 hover:border-[#C77C8D] cursor-pointer transition-colors"
+          >
+            <div className="text-lg sm:text-xl font-black text-[#C77C8D]">
+              {compatibilityScore}%
+            </div>
+            <div className="text-[11px] text-[#422A38]/70 font-medium">Skor Kecocokan</div>
+          </div>
+
+          <div 
+            onClick={() => onNavigateTab('analisis')}
+            className="p-2.5 rounded-xl bg-[#FFF9F5] border border-[#EAD6BF]/60 hover:border-[#C77C8D] cursor-pointer transition-colors"
+          >
+            <div className={`text-lg sm:text-xl font-black ${redFlagsCount > 0 ? 'text-rose-600' : 'text-emerald-700'}`}>
+              {redFlagsCount}
+            </div>
+            <div className="text-[11px] text-[#422A38]/70 font-medium">
+              {redFlagsCount > 0 ? 'Sinyal Waspada' : 'Red Flag'}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 3 PRINSIP PENILAIAN OBJEKTIF (Harmonis & Beradab)             */}
+      {/* ============================================================ */}
+      <section className="bg-gradient-to-br from-[#FFF9F5] via-[#F8E6E9]/40 to-[#FFF9F5] rounded-2xl p-4 sm:p-5 border border-[#EAD6BF]/70 shadow-2xs">
         <div className="flex items-center gap-2 mb-3">
-          <ShieldCheck className="w-5 h-5 text-[#d70f64]" />
-          <h3 className="text-sm sm:text-base font-black text-slate-900">
-            3 Prinsip Penilaian Objektif
+          <ShieldCheck className="w-5 h-5 text-[#C77C8D]" />
+          <h3 className="text-xs sm:text-sm font-bold text-[#422A38] uppercase tracking-wider">
+            3 Prinsip Ta&apos;aruf & Penilaian Cerdas
           </h3>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-          <div className="bg-white/90 backdrop-blur-xs p-3.5 rounded-xl border border-pink-100 shadow-xs">
-            <span className="font-black text-[#d70f64] block mb-1">1. Tindakan &gt; Janji</span>
-            <p className="text-slate-600 leading-relaxed">
-              Kata-kata manis bisa dibuat dalam sekejap, namun konsistensi akhlak saat tertekan butuh karakter asli.
+          <div className="bg-white/80 p-3.5 rounded-xl border border-[#EAD6BF]/50 shadow-2xs">
+            <span className="font-bold text-[#C77C8D] block mb-1">1. Tindakan Nyata &gt; Janji</span>
+            <p className="text-[#422A38]/80 leading-relaxed text-[11px] sm:text-xs">
+              Kata manis mudah diucapkan di awal, namun tanggung jawab dan konsistensi adab terlihat saat situasi sulit.
             </p>
           </div>
 
-          <div className="bg-white/90 backdrop-blur-xs p-3.5 rounded-xl border border-pink-100 shadow-xs">
-            <span className="font-black text-[#d70f64] block mb-1">2. Waspadai Love-Bombing</span>
-            <p className="text-slate-600 leading-relaxed">
-              Pujian berlebihan dan ketergesaan di awal sering menjadi penutup untuk menyembunyikan sifat asli.
+          <div className="bg-white/80 p-3.5 rounded-xl border border-[#EAD6BF]/50 shadow-2xs">
+            <span className="font-bold text-[#C77C8D] block mb-1">2. Waspadai Ketergesaan</span>
+            <p className="text-[#422A38]/80 leading-relaxed text-[11px] sm:text-xs">
+              Pujian berlebih dan desakan tergesa-gesa tanpa melibatkan keluarga sering menutupi karakter asli.
             </p>
           </div>
 
-          <div className="bg-white/90 backdrop-blur-xs p-3.5 rounded-xl border border-pink-100 shadow-xs">
-            <span className="font-black text-[#d70f64] block mb-1">3. Musyawarah & Syar'i</span>
-            <p className="text-slate-600 leading-relaxed">
-              Gunakan hasil diagnosis sebagai bahan istikharah dan musyawarah bersama wali/keluarga yang Anda percayai.
+          <div className="bg-white/80 p-3.5 rounded-xl border border-[#EAD6BF]/50 shadow-2xs">
+            <span className="font-bold text-[#C77C8D] block mb-1">3. Istikharah & Musyawarah</span>
+            <p className="text-[#422A38]/80 leading-relaxed text-[11px] sm:text-xs">
+              Gunakan hasil penilaian objektif sebagai bahan pertimbangan bersama wali dan petunjuk dari Allah SWT.
             </p>
           </div>
         </div>
