@@ -16,6 +16,7 @@ import {
   Sparkles,
   Heart,
   Download,
+  DownloadCloud,
   Smartphone,
   CheckCircle2,
   Share2,
@@ -28,6 +29,7 @@ interface HomeViewProps {
   onNavigateTab: (tab: ActiveTab) => void;
   onOpenCandidateModal: () => void;
   onOpenGuideModal: () => void;
+  onOpenExportImportModal?: () => void;
   totalCriteriaRated: number;
   totalDaysCompleted: number;
   compatibilityScore: number;
@@ -39,6 +41,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
   onNavigateTab,
   onOpenCandidateModal,
   onOpenGuideModal,
+  onOpenExportImportModal,
   totalCriteriaRated,
   totalDaysCompleted,
   compatibilityScore,
@@ -102,131 +105,184 @@ export const HomeView: React.FC<HomeViewProps> = ({
   ];
 
   return (
-    <div className="space-y-5 pb-8 animate-fadeIn max-w-xl mx-auto sm:max-w-2xl md:max-w-3xl">
+    <div className="space-y-4 sm:space-y-5 pb-8 animate-fadeIn max-w-xl mx-auto sm:max-w-2xl md:max-w-3xl">
       {/* ============================================================ */}
-      {/* EDITORIAL HERO SECTION                                       */}
-      {/* Palet: Ivory #FFF9F5, Blush #F8E6E9, Pink Panda #D70F64,     */}
-      {/*        Deep Plum #422A38, Champagne #EAD6BF                 */}
+      {/* EDITORIAL HERO SECTION - PERSIS DENGAN REFERENSI GAMBAR      */}
+      {/* Gambar latar sunset menutupi seluruh hero card               */}
       {/* ============================================================ */}
-      <section className="relative rounded-[32px] overflow-hidden shadow-xl border border-[#EAD6BF]/80 bg-[#FFF9F5]">
-        {/* Background Image Container */}
-        <div className="relative w-full h-[500px] sm:h-[550px] md:h-[590px] overflow-hidden flex flex-col justify-between">
-          <img
-            src={heroSunsetBase64}
-            alt="Muslimah menghadap pemandangan kota saat golden hour - Checklist Bakal Suami"
-            className="absolute inset-0 w-full h-full object-cover object-[center_32%] transform scale-102 transition-transform duration-1000 ease-out"
-            loading="eager"
-            fetchPriority="high"
-          />
+      <section className="relative rounded-[28px] sm:rounded-[34px] overflow-hidden shadow-[0_12px_36px_rgba(66,42,56,0.12)] border border-[#EAD6BF]/80 bg-[#FFF9F5]">
+        {/* Background Image: Muslimah sunset menutupi seluruh container */}
+        <img
+          src={heroSunsetBase64}
+          alt="Muslimah menghadap pemandangan kota saat golden hour - Checklist Bakal Suami"
+          className="absolute inset-0 w-full h-full object-cover object-[center_32%]"
+          loading="eager"
+          fetchPriority="high"
+        />
 
-          {/* Editorial Soft Overlay Gradients */}
-          {/* Top subtle vignette for small headline readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#422A38]/70 via-[#422A38]/15 to-transparent h-40 pointer-events-none" />
-          
-          {/* Bottom rich smooth gradient into soft ivory/champagne backdrop */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#FFF9F5] via-[#FFF9F5]/90 via-55% to-transparent pointer-events-none" />
+        {/* Soft Luminous Warm Overlay: teks sangat jelas & kontras, foto tetap cerah & hangat */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FFF9F5]/90 via-[#FFF9F5]/50 via-45% to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#422A38]/30 via-transparent to-transparent pointer-events-none" />
 
-          {/* -------------------------------------------------------- */}
-          {/* TOP HEADER: Headline Kecil & Tombol Panduan              */}
-          {/* -------------------------------------------------------- */}
-          <div className="relative z-10 px-5 pt-5 sm:px-7 sm:pt-6 flex items-start justify-between gap-3">
-            <div className="max-w-[78%] sm:max-w-md">
-              {/* Headline kecil seperti arahan nomor 3 */}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white shadow-sm mb-1">
-                <Sparkles className="w-3 h-3 text-[#F8E6E9]" />
-                <span className="text-[11px] sm:text-xs font-medium tracking-wide">
-                  Prinsip Muslimah Cerdas
-                </span>
-              </div>
-              <p className="text-white text-xs sm:text-sm md:text-base font-semibold leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] tracking-wide">
-                &ldquo;Pilih yang Siap, Bukan yang Sekadar Pandai Berjanji.&rdquo;
-              </p>
-            </div>
+        {/* Hero Content: Bersih, Editorial & Terpusat seperti Gambar Referensi */}
+        <div className="relative z-10 flex flex-col items-center justify-between min-h-[460px] sm:min-h-[500px] md:min-h-[530px] px-6 pt-7 pb-8 sm:px-8 sm:pt-9 sm:pb-10 text-center">
+          {/* Headline Kecil (Poin 3) */}
+          <p className="text-xs sm:text-sm font-semibold text-[#422A38] tracking-wide text-center">
+            Pilih yang Siap, Bukan yang Sekadar Pandai Berjanji.
+          </p>
 
-            {/* Tombol Panduan Cepat */}
-            <button
-              onClick={onOpenGuideModal}
-              className="bg-white/80 hover:bg-white text-[#422A38] text-xs font-bold px-3.5 py-1.5 rounded-full border border-[#fcc2d7] shadow-sm flex items-center gap-1.5 transition-all cursor-pointer active:scale-95"
-              title="Buka panduan penilaian"
-            >
-              <Info className="w-3.5 h-3.5 text-[#d70f64]" />
-              <span className="hidden xs:inline">Panduan</span>
-            </button>
-          </div>
+          {/* Judul Utama Besar Tipografi Serif Elegan (Poin 4 & 5) */}
+          <div className="flex flex-col items-center my-auto pt-2 pb-3">
+            <h1 className="font-serif-hero text-center leading-[1.08] mb-2.5">
+              <span className="block text-4xl sm:text-5xl md:text-6xl font-bold text-[#422A38] tracking-tight">
+                Checklist
+              </span>
+              <span className="block text-4xl sm:text-5xl md:text-6xl italic font-semibold text-[#d70f64] mt-0.5">
+                Bakal Suami
+              </span>
+            </h1>
 
-          {/* -------------------------------------------------------- */}
-          {/* BOTTOM HERO CONTENT: Judul Serif, Subtitle, & Tombol Pill */}
-          {/* -------------------------------------------------------- */}
-          <div className="relative z-10 px-5 pb-7 sm:px-8 sm:pb-9 text-center flex flex-col items-center">
-            {/* Judul Utama Besar dengan Tipografi Serif Elegan */}
-            <div className="mb-2">
-              <h1 className="font-serif-hero font-bold tracking-tight leading-[1.08]">
-                <span className="block text-4xl sm:text-5xl md:text-6xl text-[#422A38] font-bold tracking-tight drop-shadow-xs">
-                  Checklist
-                </span>
-                <span className="block text-4xl sm:text-5xl md:text-6xl text-[#C77C8D] font-serif-hero italic font-semibold mt-0.5">
-                  Bakal Suami
-                </span>
-              </h1>
-            </div>
-
-            {/* Subtitle */}
-            <p className="text-[#422A38]/90 text-xs sm:text-sm md:text-base font-medium tracking-wide mb-6 max-w-sm sm:max-w-md">
+            {/* Subtitle (Poin 5) */}
+            <p className="text-xs sm:text-sm md:text-base font-medium text-[#422A38]/90 tracking-wide max-w-xs sm:max-w-sm mb-7">
               Kenali Tindakan, Bukan Sekadar Kata-Kata
             </p>
 
-            {/* Tombol Utama Berbentuk Pill (Warna Pink Panda #D70F64) */}
+            {/* Tombol Utama Berbentuk Pill - Pink Panda #D70F64 (Poin 6) */}
             <button
               onClick={() => onNavigateTab('checklist')}
-              className="group inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 rounded-full text-white font-bold text-sm sm:text-base bg-[#d70f64] hover:bg-[#bf0d58] active:bg-[#a80b4d] active:scale-95 shadow-[0_10px_25px_rgba(215,15,100,0.45)] border border-[#ff2b85]/40 transition-all duration-200 cursor-pointer"
+              className="group inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 rounded-full text-white font-bold text-sm sm:text-base bg-[#d70f64] hover:bg-[#bf0d58] active:bg-[#a80b4d] active:scale-95 shadow-[0_12px_28px_rgba(215,15,100,0.45)] border border-[#ff2b85]/40 transition-all duration-200 cursor-pointer"
             >
               <span>Mulai Penilaian Saya</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
             </button>
           </div>
-        </div>
 
-        {/* ---------------------------------------------------------- */}
-        {/* HERO BOTTOM BAR: Profil Calon Aktif                         */}
-        {/* ---------------------------------------------------------- */}
-        <div className="bg-[#F8E6E9]/60 px-4 sm:px-6 py-3 border-t border-[#EAD6BF]/60 flex flex-wrap items-center justify-between gap-2.5">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-[11px] text-[#422A38]/70 font-bold uppercase tracking-wider">
-              Calon Dinilai:
-            </span>
-            <span className="text-xs sm:text-sm font-bold text-[#422A38] bg-white px-3 py-1 rounded-full border border-[#EAD6BF]/70 shadow-2xs">
-              {candidate.name}
-            </span>
-            {candidate.age && (
-              <span className="text-xs font-medium text-[#422A38]/80 bg-white/80 px-2.5 py-0.5 rounded-full border border-[#EAD6BF]/50">
-                {candidate.age} th
+          {/* Ruang bawah agar proporsi hero seimbang */}
+          <div className="h-2" />
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 5 MENU CARD DALAM GRID DUA KOLOM (Persis Referensi Gambar)   */}
+      {/* Card putih/ivory, rounded, outline dusty rose, shadow tipis   */}
+      {/* ============================================================ */}
+      <section className="space-y-2.5">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+          {menuCards.map((item, idx) => {
+            const Icon = item.icon;
+            // 5th card spans 2 columns to complete the 2-column grid gracefully
+            const isLastSingle = idx === 4;
+
+            return (
+              <div
+                key={item.id}
+                onClick={() => onNavigateTab(item.tab)}
+                className={`group cursor-pointer bg-[#FFF9F5] hover:bg-white rounded-2xl p-4 sm:p-5 border border-[#EAD6BF]/80 hover:border-[#d70f64] shadow-[0_2px_12px_rgba(66,42,56,0.04)] hover:shadow-md transition-all duration-200 flex flex-col justify-between ${
+                  isLastSingle ? 'col-span-2' : 'col-span-1'
+                }`}
+              >
+                <div>
+                  {/* Top Bar inside Card: Outline Icon & Badge */}
+                  <div className="flex items-center justify-between gap-2 mb-2.5">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#fff0f5] border border-[#fcc2d7] text-[#d70f64] flex items-center justify-center flex-shrink-0 group-hover:scale-105 group-hover:bg-[#d70f64] group-hover:text-white transition-all shadow-2xs">
+                      <Icon className="w-5 h-5 stroke-[1.8]" />
+                    </div>
+
+                    <span className="text-[10px] sm:text-xs font-bold text-[#422A38]/70 bg-[#F8E6E9]/60 px-2 py-0.5 rounded-full border border-[#EAD6BF]/50">
+                      {item.badge}
+                    </span>
+                  </div>
+
+                  {/* Title & Subtitle */}
+                  <div>
+                    <h3 className="text-sm sm:text-base font-bold text-[#422A38] group-hover:text-[#d70f64] transition-colors leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs font-semibold text-[#d70f64] mt-0.5">
+                      — {item.subtitle}
+                    </p>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-[11px] sm:text-xs text-[#422A38]/75 leading-relaxed mt-1.5 line-clamp-2">
+                    {item.desc}
+                  </p>
+                </div>
+
+                {/* Bottom Footer inside Card: Status indicator & Arrow */}
+                <div className="pt-2.5 mt-2.5 border-t border-[#EAD6BF]/40 flex items-center justify-between text-[11px] sm:text-xs">
+                  <span className="font-semibold text-[#422A38]/60">
+                    {item.status}
+                  </span>
+                  <div className="inline-flex items-center gap-1 font-bold text-[#d70f64] group-hover:translate-x-1 transition-transform">
+                    <span>Buka</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* CALON AKTIF & AKSI KELOLA DATA (Fungsi Lengkap Terpelihara)   */}
+      {/* ============================================================ */}
+      <section className="bg-white/95 rounded-2xl p-4 sm:p-5 border border-[#EAD6BF]/80 shadow-[0_2px_12px_rgba(66,42,56,0.04)]">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-[11px] font-bold text-[#422A38]/70 uppercase tracking-wider">
+                Calon Dinilai:
               </span>
-            )}
-            {candidate.occupation && (
-              <span className="text-xs font-medium text-[#422A38]/80 bg-white/80 px-2.5 py-0.5 rounded-full border border-[#EAD6BF]/50">
-                💼 {candidate.occupation}
+              <span className="text-sm font-bold text-[#422A38] bg-[#FFF9F5] px-3 py-1 rounded-full border border-[#EAD6BF]/70 shadow-2xs">
+                {candidate.name}
               </span>
-            )}
-            {candidate.maritalStatus && (
-              <span className="text-xs font-medium text-[#422A38]/80 bg-white/80 px-2.5 py-0.5 rounded-full border border-[#EAD6BF]/50">
-                💍 {candidate.maritalStatus}
-              </span>
-            )}
-            {candidate.address && (
-              <span className="text-xs font-medium text-[#422A38]/80 bg-white/80 px-2.5 py-0.5 rounded-full border border-[#EAD6BF]/50">
-                📍 {candidate.address}
-              </span>
-            )}
+              {candidate.age && (
+                <span className="text-xs text-[#422A38]/80 bg-[#F8E6E9]/70 px-2.5 py-0.5 rounded-full border border-[#EAD6BF]/50">
+                  {candidate.age} th
+                </span>
+              )}
+              {candidate.occupation && (
+                <span className="text-xs text-[#422A38]/80 bg-[#F8E6E9]/70 px-2.5 py-0.5 rounded-full border border-[#EAD6BF]/50">
+                  💼 {candidate.occupation}
+                </span>
+              )}
+            </div>
+            <p className="text-[11px] text-[#422A38]/70 mt-1">
+              Data evaluasi tersimpan otomatis &amp; dapat diekspor kapan saja.
+            </p>
           </div>
 
-          <button
-            onClick={onOpenCandidateModal}
-            className="text-xs font-bold text-[#d70f64] hover:text-[#a80b4d] flex items-center gap-1.5 bg-white px-3.5 py-1.5 rounded-full border border-[#fcc2d7] hover:bg-[#fff0f5] transition-all shadow-2xs ml-auto cursor-pointer active:scale-95"
-          >
-            <Users className="w-3.5 h-3.5 text-[#d70f64]" />
-            <span>Kelola Calon</span>
-            <ChevronRight className="w-3 h-3 text-[#d70f64]" />
-          </button>
+          <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
+            <button
+              onClick={onOpenCandidateModal}
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-[#d70f64] hover:bg-[#bf0d58] active:scale-95 transition-all shadow-sm shadow-[#d70f64]/20 cursor-pointer"
+            >
+              <Users className="w-3.5 h-3.5" />
+              <span>Ganti / Kelola Calon</span>
+            </button>
+
+            <button
+              onClick={onOpenGuideModal}
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-[#422A38] bg-[#FFF9F5] hover:bg-[#F8E6E9] border border-[#EAD6BF] active:scale-95 transition-all cursor-pointer"
+              title="Panduan Ta'aruf & Penilaian"
+            >
+              <Info className="w-3.5 h-3.5 text-[#d70f64]" />
+              <span>Panduan</span>
+            </button>
+
+            {onOpenExportImportModal && (
+              <button
+                onClick={onOpenExportImportModal}
+                className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-[#422A38] bg-[#FFF9F5] hover:bg-[#F8E6E9] border border-[#EAD6BF] active:scale-95 transition-all cursor-pointer"
+                title="Cadangkan atau Pulihkan Data"
+              >
+                <DownloadCloud className="w-3.5 h-3.5 text-[#d70f64]" />
+                <span>Backup</span>
+              </button>
+            )}
+          </div>
         </div>
       </section>
 
@@ -290,80 +346,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <span>Aplikasi Terpasang (Mode PWA Aktif)</span>
         </div>
       )}
-
-      {/* ============================================================ */}
-      {/* 5 MENU CARD DALAM GRID DUA KOLOM                             */}
-      {/* Card putih/ivory, rounded, outline dusty rose, shadow tipis   */}
-      {/* ============================================================ */}
-      <section className="space-y-3">
-        <div className="flex items-center justify-between px-1">
-          <div>
-            <h2 className="text-base sm:text-lg font-serif-hero font-bold text-[#422A38] tracking-tight">
-              Modul Penilaian Karakter
-            </h2>
-            <p className="text-xs text-[#422A38]/70">
-              Pilih modul evaluasi untuk memverifikasi kesiapan dan kepribadian calon
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3 sm:gap-4">
-          {menuCards.map((item, idx) => {
-            const Icon = item.icon;
-            // 5th card spans 2 columns to complete the 2-column grid gracefully
-            const isLastSingle = idx === 4;
-
-            return (
-              <div
-                key={item.id}
-                onClick={() => onNavigateTab(item.tab)}
-                className={`group cursor-pointer bg-[#FFF9F5] hover:bg-white rounded-2xl p-4 sm:p-5 border border-[#EAD6BF]/70 hover:border-[#d70f64] shadow-[0_2px_10px_rgba(66,42,56,0.04)] hover:shadow-md transition-all duration-200 flex flex-col justify-between ${
-                  isLastSingle ? 'col-span-2 sm:col-span-2' : 'col-span-1'
-                }`}
-              >
-                <div>
-                  {/* Top Bar inside Card: Outline Icon & Badge */}
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#fff0f5] border border-[#fcc2d7] text-[#d70f64] flex items-center justify-center flex-shrink-0 group-hover:scale-105 group-hover:bg-[#d70f64] group-hover:text-white transition-all">
-                      <Icon className="w-5 h-5 stroke-[1.8]" />
-                    </div>
-
-                    <span className="text-[10px] sm:text-xs font-bold text-[#422A38]/70 bg-[#F8E6E9]/60 px-2 py-0.5 rounded-full border border-[#EAD6BF]/50">
-                      {item.badge}
-                    </span>
-                  </div>
-
-                  {/* Title & Subtitle */}
-                  <div>
-                    <h3 className="text-sm sm:text-base font-bold text-[#422A38] group-hover:text-[#d70f64] transition-colors leading-snug">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs font-semibold text-[#d70f64] mt-0.5">
-                      — {item.subtitle}
-                    </p>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-[11px] sm:text-xs text-[#422A38]/75 leading-relaxed mt-2 line-clamp-2">
-                    {item.desc}
-                  </p>
-                </div>
-
-                {/* Bottom Footer inside Card: Status indicator & Arrow */}
-                <div className="pt-3 mt-3 border-t border-[#EAD6BF]/40 flex items-center justify-between text-[11px] sm:text-xs">
-                  <span className="font-semibold text-[#422A38]/60">
-                    {item.status}
-                  </span>
-                  <div className="inline-flex items-center gap-1 font-bold text-[#d70f64] group-hover:translate-x-1 transition-transform">
-                    <span>Buka</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
 
       {/* ============================================================ */}
       {/* QUICK SUMMARY PROGRESS METRICS (Pelengkap Konsistensi Data)    */}

@@ -253,28 +253,35 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#fff0f5] text-slate-800 flex flex-col font-sans">
-      {/* Header */}
-      <Header
-        candidates={candidates}
-        activeCandidate={activeCandidate}
-        onSelectCandidate={handleSelectCandidate}
-        onOpenCandidateModal={() => setCandidateModalOpen(true)}
-        onOpenGuideModal={() => setGuideModalOpen(true)}
-        onOpenExportImportModal={() => setExportImportModalOpen(true)}
-        onNavigateHome={() => setActiveTab('home')}
-        totalCriteriaRated={metrics.totalCriteriaRated}
-        totalDaysCompleted={metrics.totalDaysCompleted}
-        compatibilityScore={metrics.compatibilityScore}
-      />
+      {/* Header - ditampilkan pada tab modul agar tampilan Home bersih sesuai referensi editorial */}
+      {activeTab !== 'home' && (
+        <Header
+          candidates={candidates}
+          activeCandidate={activeCandidate}
+          onSelectCandidate={handleSelectCandidate}
+          onOpenCandidateModal={() => setCandidateModalOpen(true)}
+          onOpenGuideModal={() => setGuideModalOpen(true)}
+          onOpenExportImportModal={() => setExportImportModalOpen(true)}
+          onNavigateHome={() => setActiveTab('home')}
+          totalCriteriaRated={metrics.totalCriteriaRated}
+          totalDaysCompleted={metrics.totalDaysCompleted}
+          compatibilityScore={metrics.compatibilityScore}
+        />
+      )}
 
       {/* Main View Area */}
-      <main className="flex-1 max-w-4xl w-full mx-auto px-3 sm:px-4 pt-3.5 pb-24">
+      <main className={`flex-1 w-full mx-auto pb-24 ${
+        activeTab === 'home' 
+          ? 'max-w-md sm:max-w-xl md:max-w-2xl px-3 sm:px-4 pt-3 sm:pt-6' 
+          : 'max-w-4xl px-3 sm:px-4 pt-3.5'
+      }`}>
         {activeTab === 'home' && (
           <HomeView
             candidate={activeCandidate}
             onNavigateTab={(tab) => setActiveTab(tab)}
             onOpenCandidateModal={() => setCandidateModalOpen(true)}
             onOpenGuideModal={() => setGuideModalOpen(true)}
+            onOpenExportImportModal={() => setExportImportModalOpen(true)}
             totalCriteriaRated={metrics.totalCriteriaRated}
             totalDaysCompleted={metrics.totalDaysCompleted}
             compatibilityScore={metrics.compatibilityScore}
